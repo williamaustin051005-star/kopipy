@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KOPIPY | Kopi Happy</title>
+  <meta name="description" content="Kopi arabica terjangkau untuk mahasiswa dan pekerja. Pesan online, ambil tanpa antre.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#atas" aria-label="KOPIPY, ke atas">KOPIPY</a>
+    <nav aria-label="Navigasi utama">
+      <a href="#menu">Menu</a>
+      <a href="#cara">Cara pesan</a>
+      <a href="#happy">Happy Points</a>
+    </nav>
+    <button id="openCart" class="cartbtn" type="button">Keranjang <span id="cartCount" aria-live="polite">0</span></button>
+  </header>
+
+  <main id="atas">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Tiap tegukan membuat kita Happy</h1>
+        <p>Kopi arabica Rp 15.000–40.000 untuk mahasiswa dan pekerja. Pesan dari ponsel, ambil tanpa antre.</p>
+        <a class="btn" href="#menu">Lihat menu</a>
+      </div>
+      <svg class="cup" viewBox="0 0 260 260" role="img" aria-label="Gambar cangkir kopi tersenyum">
+        <g class="steam" fill="none" stroke="#F6B93B" stroke-width="7" stroke-linecap="round">
+          <path d="M95 70c-12-14 12-24 0-38"/><path d="M130 66c-12-14 12-24 0-38"/><path d="M165 70c-12-14 12-24 0-38"/>
+        </g>
+        <ellipse cx="130" cy="225" rx="100" ry="14" fill="#1B100C" opacity=".35"/>
+        <path d="M45 95h170v50c0 40-34 72-85 72s-85-32-85-72z" fill="#FFF"/>
+        <path d="M215 110h12c20 0 20 38 0 38h-17" fill="none" stroke="#FFF" stroke-width="12" stroke-linecap="round"/>
+        <ellipse cx="130" cy="95" rx="85" ry="13" fill="#8B5E3C"/>
+        <circle cx="103" cy="150" r="7" fill="#2A1B16"/><circle cx="157" cy="150" r="7" fill="#2A1B16"/>
+        <path d="M105 172q25 24 50 0" fill="none" stroke="#2A1B16" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+    </section>
+
+    <section id="menu" class="wrap">
+      <h2>Menu KOPIPY</h2>
+      <p class="sub">Harga sudah jelas, tanpa biaya tersembunyi. Biaya antar hanya muncul bila kamu memilih delivery.</p>
+      <div class="tabs" role="tablist" aria-label="Kategori menu" id="tabs"></div>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section id="cara" class="wrap steps">
+      <h2>Cara pesan</h2>
+      <ol>
+        <li><strong>Pilih menu.</strong> Tambahkan ke keranjang, atur jumlahnya.</li>
+        <li><strong>Pilih cara ambil.</strong> Pick-up, makan di tempat, atau delivery.</li>
+        <li><strong>Bayar.</strong> QRIS, e-wallet, atau tunai di kasir. Dapat Happy Points otomatis.</li>
+      </ol>
+    </section>
+
+    <section id="happy" class="wrap happy">
+      <h2>Happy Points</h2>
+      <p>Tiap belanja Rp 10.000 jadi 1 poin. Kumpulkan 25 poin untuk 1 minuman gratis. Mahasiswa dapat diskon 10% dengan KTM.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <strong>KOPIPY (Kopi Happy)</strong>
+    <span>Prototype toko online untuk tugas UTS Digital Entrepreneurship, Universitas Tarumanagara. Pembayaran di halaman ini hanya simulasi.</span>
+  </footer>
+
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="drawer" id="drawer" aria-label="Keranjang belanja" aria-hidden="true">
+    <div class="drawer-head"><h2>Keranjang</h2><button type="button" id="closeCart" class="x" aria-label="Tutup keranjang">&times;</button></div>
+    <ul id="items" class="items"></ul>
+    <p id="empty" class="empty">Keranjang masih kosong. Pilih menu dulu, ya.</p>
+    <form id="checkout" novalidate>
+      <fieldset>
+        <legend>Cara ambil</legend>
+        <label><input type="radio" name="method" value="pickup" checked> Pick-up</label>
+        <label><input type="radio" name="method" value="dinein"> Makan di tempat</label>
+        <label><input type="radio" name="method" value="delivery"> Delivery (+Rp 8.000)</label>
+      </fieldset>
+      <label class="f">Nama <input name="name" autocomplete="name" required></label>
+      <label class="f">Nomor WhatsApp <input name="wa" inputmode="tel" autocomplete="tel" required></label>
+      <label class="f" id="timeRow">Waktu ambil
+        <select name="time"><option>Secepatnya</option><option>15 menit lagi</option><option>30 menit lagi</option><option>1 jam lagi</option></select>
+      </label>
+      <label class="f" id="addrRow" hidden>Alamat pengantaran <textarea name="addr" rows="2"></textarea></label>
+      <label class="f">Pembayaran
+        <select name="pay"><option>QRIS</option><option>E-wallet (GoPay, OVO, DANA)</option><option>Tunai di kasir</option></select>
+      </label>
+      <label class="chk"><input type="checkbox" name="student"> Saya mahasiswa (diskon 10%, tunjukkan KTM saat ambil)</label>
+      <dl class="sum">
+        <div><dt>Subtotal</dt><dd id="sSub">Rp 0</dd></div>
+        <div><dt>Diskon pelajar</dt><dd id="sDisc">Rp 0</dd></div>
+        <div><dt>Biaya antar</dt><dd id="sFee">Rp 0</dd></div>
+        <div class="tot"><dt>Total</dt><dd id="sTot">Rp 0</dd></div>
+        <div><dt>Happy Points didapat</dt><dd id="sPts">0</dd></div>
+      </dl>
+      <p id="err" class="err" role="alert"></p>
+      <button class="btn wide" type="submit">Bayar sekarang</button>
+    </form>
+  </aside>
+
+  <dialog id="done">
+    <h2>Pesanan diterima</h2>
+    <p id="doneText"></p>
+    <button class="btn" type="button" id="doneClose">Selesai</button>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
